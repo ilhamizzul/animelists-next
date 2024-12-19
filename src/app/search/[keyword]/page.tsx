@@ -5,6 +5,7 @@ import React from 'react'
 
 const SearchPage = async (url : any) => {
   const {keyword} = url.params
+  const decodedKeyword = decodeURI(keyword)
   const fetchAPI = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/anime?&q=${keyword}`)
   const searchAnime = await fetchAPI.json()
   // if (!searchAnime) {
@@ -14,7 +15,7 @@ const SearchPage = async (url : any) => {
   return (
     <>
       <section>
-        <Header title={`Pencarian untuk ${keyword}...`}/>
+        <Header title={`Pencarian untuk ${decodedKeyword}...`}/>
         <AnimeList apiData={searchAnime} />
       </section>
     </>

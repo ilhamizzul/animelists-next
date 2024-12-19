@@ -36,7 +36,7 @@ export default function RootLayout({
         >
           <Layout className="flex flex-col min-h-screen">
             <Navbar/>
-            <Content className="p-5 bg-color-dark">
+            <Content className="p-5">
               {children}
             </Content>
             {/* <Footer className="flex justify-center text-center">Footer</Footer> */}

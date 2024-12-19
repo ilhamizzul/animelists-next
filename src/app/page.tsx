@@ -1,7 +1,5 @@
 import Header from "@/components/AnimeList/header";
 import AnimeList from "@/components/AnimeList/index";
-import Image from "next/image";
-import Link from "next/link";
 
 
 

@@ -1,46 +1,29 @@
 "use client"
-import { PlayCircleOutlined } from '@ant-design/icons'
-import { Card, Divider } from 'antd'
-import Image from 'next/image'
+import { Card } from 'antd'
 import Link from 'next/link'
 import React from 'react'
-
-interface IAnime {
-  mal_id: number,
-  title: string,
-  image: string,
-  movieType: string,
-  episodes: string
-}
-
-interface IAnimeLists {
-  data: Array<Object>,
-  pagination: Object
-}
+import {IAnimeLists, IAnimeData} from '@/types/AnimeLists.types'
 
 
-const index = (dataResponse: {apiData: IAnimeLists}) => {
-  const data= dataResponse.apiData.data
-  // const clickHandler = () => {
-  //   alert('anime clicked with name and id of: ' + data.mal_id + ` (${data.title})`)
-  // }
+const index = ({apiData}: { apiData?: IAnimeLists }) => {
+  const data = apiData?.data
   return (
     <>
       <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-4 px-4">
-        {data.map((anime: any) => {
-          let dataAnime : IAnime = {
+        {data?.map((anime: IAnimeData, index: number) => {
+          let dataAnime = {
             mal_id: anime.mal_id,
             title: anime.title,
             episodes: anime.episodes,
             image: anime.images.webp.image_url,
-            movieType: anime.type
+            movieType: anime.type,
           }
-          return(
-            <Link href={`/${dataAnime.mal_id}`}>
+          return (
+            <Link href={`/${dataAnime.mal_id}`} key={index}>
               <Card
                 hoverable
                 // title={`${dataAnime.title} (${dataAnime.movieType})`}
-                className='h-full bg-blue-400 text-color-primary'
+                className='h-full bg-blue-400 text-color-accent'
                 cover={
                   <img
                     src={dataAnime.image}
