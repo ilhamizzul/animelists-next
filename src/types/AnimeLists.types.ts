@@ -22,24 +22,18 @@ export interface IAnimeData {
   rating: string,
   season: number,
   year: number,
-  genres: {
+  genres: Array<{
     mal_id: number,
     type: string,
     name: string,
     url: string
-  }[],
-  explicit_genres: {
+  }>,
+  themes: Array<{
     mal_id: number,
     type: string,
     name: string,
     url: string
-  }[],
-  themes: {
-    mal_id: number,
-    type: string,
-    name: string,
-    url: string
-  }[],
+  }>,
 }
 
 interface IAnimeImage {

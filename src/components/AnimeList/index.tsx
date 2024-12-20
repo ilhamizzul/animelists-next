@@ -19,7 +19,7 @@ const index = ({apiData}: { apiData?: IAnimeLists }) => {
             movieType: anime.type,
           }
           return (
-            <Link href={`/${dataAnime.mal_id}`} key={index}>
+            <Link href={`anime/${dataAnime.mal_id}`} key={index}>
               <Card
                 hoverable
                 // title={`${dataAnime.title} (${dataAnime.movieType})`}

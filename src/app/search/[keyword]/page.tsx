@@ -1,22 +1,38 @@
-import Header from '@/components/AnimeList/header';
+'use client'
+import HeaderMenu from '@/components/Utilities/HeaderMenu'
+import Pagination from '@/components/Utilities/Pagination'
 import AnimeList from "@/components/AnimeList/index";
-import { redirect } from 'next/dist/server/api-utils';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { GetAnimeSearch } from '@/app/services/api-libs'
+import { IAnimeLists } from '@/types/AnimeLists.types'
 
-const SearchPage = async (url : any) => {
+const SearchPage = (url: any) => {
   const {keyword} = url.params
   const decodedKeyword = decodeURI(keyword)
-  const fetchAPI = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/anime?&q=${keyword}`)
-  const searchAnime = await fetchAPI.json()
-  // if (!searchAnime) {
-  //   redirect('/not-found')
-  // }
+
+  const [page, setPage] = useState(1)
+  const [data, setData] = useState<IAnimeLists>()
+
+  const fetchData = async () => {
+    const response = await GetAnimeSearch({ limit: 16, q: keyword, page: page })
+    setData(response)
+    return true
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [page])
 
   return (
     <>
-      <section>
-        <Header title={`Pencarian untuk ${decodedKeyword}...`}/>
-        <AnimeList apiData={searchAnime} />
+      <section className='min-h-screen'>
+        <HeaderMenu title={`Pencarian untuk ${decodedKeyword}...`} />
+        <AnimeList apiData={data} />
+        <Pagination 
+          setPage={setPage} 
+          currentPage={data?.pagination.current_page} 
+          totalPage={data?.pagination.items.total}
+        />
       </section>
     </>
   );
