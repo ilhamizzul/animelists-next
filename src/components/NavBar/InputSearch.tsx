@@ -7,7 +7,7 @@ const InputSearch = (params: {placeholder: string}) => {
   type SearchProps = GetProps<typeof Input.Search>;
   const router = useRouter()
   const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
-    if (!value) return
+    if (!value || value.trim() == "") return
     const route = `/search/${value}`
     router.push(route)
   };
