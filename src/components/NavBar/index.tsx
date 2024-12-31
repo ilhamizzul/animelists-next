@@ -1,10 +1,9 @@
 "use client"
-import { Input } from 'antd'
 import { Header } from 'antd/es/layout/layout'
 import Link from 'next/link'
 import React from 'react'
-import type { GetProps } from 'antd';
 import InputSearch from './InputSearch'
+import UserActionButton from './UserActionButton'
 
 const Navbar = () => {
 
@@ -18,6 +17,7 @@ const Navbar = () => {
     >
       <Link href={'/'} className='font-bold text-color-dark hover:text-color-primary lg:text-3xl md:text-2xl sm:text-lg text-lg'>CuyAnimeList</Link>
       <InputSearch placeholder='Search Anime...'/>
+      <UserActionButton/>
     </Header>
   )
 }
